@@ -20,6 +20,8 @@ function ScrollButton() {
           position: "fixed",
           left: "25px",
           bottom: "40px",
+          borderRadius: "100%",
+          paddingY: "30px",
           visibility: `${visible}`,
         }}
         className={visible ? "show-scroll-btn" : "hide-scroll-btn"}

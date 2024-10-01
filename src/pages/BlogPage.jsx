@@ -36,7 +36,7 @@ function BlogPage() {
     <Container maxWidth="lg" sx={{ padding: "24px" }}>
       <ScrollButton />
       <Grid container>
-        <Grid item xs={12} mt={9} display="flex" justifyContent="space-between">
+        <Grid item xs={12} mt={5} display="flex" justifyContent="space-between">
           <Typography
             component="h2"
             variant="h4"
