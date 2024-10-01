@@ -6,11 +6,16 @@ import Loader from "../shared/Loader";
 import { Avatar, Box, Container, Grid, Typography } from "@mui/material";
 import CommentForm from "../components/comment/CommentForm";
 import Comments from "../components/comment/Comments";
+import ScrollButton from "../shared/ScrollButton";
+import { useEffect } from "react";
 
 function BlogPage() {
   const { slug } = useParams();
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: "0" });
+  }, []);
 
   const {
     data: postData,
@@ -20,16 +25,16 @@ function BlogPage() {
     variables: { slug },
   });
 
+  const authorHandler = () => {
+    navigate(`/authors/${postData.post.author.slug}`);
+  };
   if (postLoading) return <Loader />;
   if (postError) return <h3>Error</h3>;
   const { author, content, coverPhoto, title } = postData.post;
 
-  const authorHandler = () => {
-    navigate(`/authors/${postData.post.author.slug}`);
-  };
-
   return (
     <Container maxWidth="lg" sx={{ padding: "24px" }}>
+      <ScrollButton />
       <Grid container>
         <Grid item xs={12} mt={9} display="flex" justifyContent="space-between">
           <Typography

@@ -5,11 +5,17 @@ import { Avatar, Container, Grid, Typography } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import CardEL from "../shared/CardEL";
 import Loader from "../shared/Loader";
+import ScrollButton from "../shared/ScrollButton";
+import { useEffect } from "react";
 
 function AuthorPage() {
   const { slug } = useParams();
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: "0" });
+  }, []);
+
   const { loading, data, error } = useQuery(GET_AUTHOR_INFO, {
     variables: { slug },
   });
@@ -19,6 +25,7 @@ function AuthorPage() {
   const { avatar, description, name, field, posts } = data.author;
   return (
     <Container maxWidth="lg">
+      <ScrollButton />
       <Grid container mt={10}>
         <Grid
           item

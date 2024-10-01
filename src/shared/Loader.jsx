@@ -1,16 +1,10 @@
 import { TailSpin } from "react-loader-spinner";
 
+import styles from "./Loader.module.css";
+
 function Loader() {
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "1000px",
-        display: "flex",
-        justifyContent: "center",
-        paddingTop: "250px",
-      }}
-    >
+    <div className={styles.loader}>
       <TailSpin
         visible={true}
         top="200px"
