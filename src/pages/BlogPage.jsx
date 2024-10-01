@@ -9,16 +9,27 @@ import Comments from "../components/comment/Comments";
 
 function BlogPage() {
   const { slug } = useParams();
+
   const navigate = useNavigate();
 
-  const { data, loading, error } = useQuery(GET_POST_INFO, {
+  const {
+    data: postData,
+    loading: postLoading,
+    error: postError,
+  } = useQuery(GET_POST_INFO, {
     variables: { slug },
   });
-  if (loading) return <Loader />;
-  if (error) return <h3>Error</h3>;
-  const { author, content, coverPhoto, title } = data.post;
+
+  if (postLoading) return <Loader />;
+  if (postError) return <h3>Error</h3>;
+  const { author, content, coverPhoto, title } = postData.post;
+
+  const authorHandler = () => {
+    navigate(`/authors/${postData.post.author.slug}`);
+  };
+
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ padding: "24px" }}>
       <Grid container>
         <Grid item xs={12} mt={9} display="flex" justifyContent="space-between">
           <Typography
@@ -29,7 +40,10 @@ function BlogPage() {
           >
             {title}
           </Typography>
-          <ArrowBackRoundedIcon onClick={() => navigate(-1)} />
+          <ArrowBackRoundedIcon
+            onClick={() => navigate(-1)}
+            sx={{ cursor: "pointer" }}
+          />
         </Grid>
         <Grid item xs={12} mt={6}>
           <img
@@ -39,7 +53,16 @@ function BlogPage() {
             style={{ borderRadius: 15 }}
           />
         </Grid>
-        <Grid item xs={12} mt={7} display="flex" alignItems="center">
+        <Grid
+          item
+          xs={12}
+          mt={7}
+          display="flex"
+          alignItems="center"
+          maxWidth="fit-content!important"
+          sx={{ cursor: "pointer" }}
+          onClick={authorHandler}
+        >
           <Avatar
             src={author.avatar.url}
             sx={{ width: 80, height: 80, marginLeft: 2 }}

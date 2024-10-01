@@ -51,6 +51,7 @@ author(where: {slug: $slug}){
         slug
         title
     }
+    slug
 }
 }
 `
@@ -64,6 +65,7 @@ query getPost($slug : String!){
             }
             name
             field
+            slug
         }
         content{
             html

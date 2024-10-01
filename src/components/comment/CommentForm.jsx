@@ -13,7 +13,6 @@ function CommentForm({ slug }) {
   const [sendComment, { loading, data, errors }] = useMutation(SEND_COMMENT, {
     variables: { name, email, text, slug },
   });
-  console.log(data);
 
   const sendHandler = () => {
     if (name && email && text) {
@@ -58,7 +57,7 @@ function CommentForm({ slug }) {
               left: "auto",
               marginRight: 25,
               paddingLeft: "20px",
-              maxWidth: 'fit-content',
+              maxWidth: "fit-content",
               backgroundColor: "#fff",
             },
           }}

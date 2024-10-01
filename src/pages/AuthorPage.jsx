@@ -1,13 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GET_AUTHOR_INFO } from "../graphql/queries";
 import { Avatar, Container, Grid, Typography } from "@mui/material";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import CardEL from "../shared/CardEL";
 import Loader from "../shared/Loader";
 
 function AuthorPage() {
   const { slug } = useParams();
 
+  const navigate = useNavigate();
   const { loading, data, error } = useQuery(GET_AUTHOR_INFO, {
     variables: { slug },
   });
@@ -15,13 +17,19 @@ function AuthorPage() {
   if (loading) return <Loader />;
   if (error) return <h3>Error...</h3>;
   const { avatar, description, name, field, posts } = data.author;
-
-  //   console.log(data)
-  //   console.log(name)
-
   return (
     <Container maxWidth="lg">
       <Grid container mt={10}>
+        <Grid
+          item
+          xs={12}
+          sx={{ display: "flex", justifyContent: "left", paddingLeft: "24px" }}
+        >
+          <ArrowBackRoundedIcon
+            onClick={() => navigate(-1)}
+            sx={{ cursor: "pointer" }}
+          />
+        </Grid>
         <Grid
           item
           xs={12}
@@ -66,5 +74,4 @@ function AuthorPage() {
     </Container>
   );
 }
-
 export default AuthorPage;

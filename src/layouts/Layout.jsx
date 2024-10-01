@@ -1,12 +1,12 @@
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import BookIcon from "@mui/icons-material/Book";
 import Container from "@mui/material/Container";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Layout({ children }) {
+  const navigate = useNavigate();
   return (
     <>
       {/*----------------------------- <header> ---------------------------*/}
@@ -16,12 +16,16 @@ function Layout({ children }) {
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1 }}
+              sx={{ flexGrow: 1, cursor: "pointer" }}
               flex={1}
+              onClick={() => navigate("/")}
             >
               پروژه وبلاگ
             </Typography>
-            <BookIcon />
+            <BookIcon
+              onClick={() => navigate("/")}
+              sx={{ cursor: "pointer" }}
+            />
           </Toolbar>
         </Container>
       </AppBar>
